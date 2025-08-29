@@ -1,0 +1,14 @@
+config:
+  target: "http://192.168.100.10"  
+  phases:
+    - duration: 50   # duración de la prueba en segundos
+      arrivalRate: 10 # 10 usuarios virtuales por segundo
+    - duration: 50
+      arrivalRate: 50 # luego sube a 50 usuarios por segundo
+    - duration: 50
+      arrivalRate: 80 # stress test a 80 usuarios/segundo
+
+scenarios:
+  - flow:
+      - get:
+          url: "/"
