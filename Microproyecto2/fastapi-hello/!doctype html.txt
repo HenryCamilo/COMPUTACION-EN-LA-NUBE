@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="es">
+  <body>
+    <h2>Clasificador CIFAR-10 en AKS</h2>
+    <form action="http://4.242.183.98/predict" method="post" enctype="multipart/form-data" target="_blank">
+      <input type="file" name="img" accept="image/*" required />
+      <button type="submit">Enviar a predecir</button>
+    </form>
+  </body>
+</html>
