@@ -1,0 +1,16 @@
+﻿Para el punto 4 
+
+Primero para habilitar el metrics registro de proveedores
+
+az provider register --namespace Microsoft.Insights
+az provider register --namespace Microsoft.OperationsManagement
+az provider register --namespace Microsoft.OperationalInsights
+
+Luego verificar 
+az aks enable-addons -g Practica2 -n Practica2 -a monitoring --workspace-resource-id $LAW_ID
+Verificar los pods
+kubectl -n kube-system get pods | grep -E "ama|oms|insights|monitor"
+
+Para revisar en vivo
+kubectl top nodes
+kubectl top pods -A
