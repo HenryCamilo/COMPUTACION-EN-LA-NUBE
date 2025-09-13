@@ -1,0 +1,11 @@
+﻿apiVersion: v1
+kind: Service
+metadata:
+  name: hello-fastapi-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: hello-fastapi
+  ports:
+    - port: 80
+      targetPort: 8080

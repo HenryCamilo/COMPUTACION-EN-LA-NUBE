@@ -1,0 +1,19 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-fastapi-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-fastapi
+  template:
+    metadata:
+      labels:
+        app: hello-fastapi
+    spec:
+      containers:
+        - name: hello-fastapi
+          image: docker.io/juandu12/hello-fastapi:v1
+          ports:
+            - containerPort: 8080
