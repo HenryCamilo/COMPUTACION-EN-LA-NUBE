@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clasificador de imágenes (AKS)</title>
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; }
+    .card { border: 1px solid #ddd; border-radius: 12px; padding: 20px; }
+    h1 { margin-top: 0; }
+    .hint { color: #555; font-size: 0.95rem; margin-top: 8px; }
+    .row { margin: 16px 0; }
+    #preview { max-width: 100%; max-height: 320px; display: none; border-radius: 8px; border: 1px dashed #ccc; padding: 8px; }
+    button { padding: 10px 16px; border-radius: 8px; border: 1px solid #0a7; background: #0a7; color: white; cursor: pointer; }
+    button:hover { filter: brightness(0.95); }
+    .footer { margin-top: 16px; color: #666; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Clasificador CIFAR-10 desplegado en AKS</h1>
+    <p>Selecciona una imagen y envíala al endpoint <code>/predict</code> de tu servicio.</p>
+
+    <form id="predictForm"
+          action="http://4.242.183.98/predict"
+          method="post"
+          enctype="multipart/form-data"
+          target="_blank">
+      <div class="row">
+        <input id="file" type="file" name="img" accept="image/*" required />
+      </div>
+      <div class="row">
+        <img id="preview" alt="Vista previa" />
+      </div>
+      <div class="row">
+        <button type="submit">Enviar a predecir</button>
+      </div>
+      <p class="hint">
+        El resultado JSON se abrirá en una pestaña nueva.<br/>
+        Si cambia la IP del servicio, edita este archivo y reemplaza <code>4.242.183.98</code>.
+      </p>
+    </form>
+
+    <div class="footer">
+      Endpoint de salud: <a href="http://4.242.183.98/health" target="_blank">/health</a>
+    </div>
+  </div>
+
+  <script>
+    // Vista previa de la imagen seleccionada (opcional, sin CORS)
+    const input = document.getElementById('file');
+    const preview = document.getElementById('preview');
+    input.addEventListener('change', () => {
+      const file = input.files?.[0];
+      if (!file) { preview.style.display = 'none'; preview.src = ''; return; }
+      preview.src = URL.createObjectURL(file);
+      preview.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
