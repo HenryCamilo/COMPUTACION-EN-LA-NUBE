@@ -1,0 +1,21 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: img-classifier-deployment
+  labels:
+    app: img-classifier
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: img-classifier
+  template:
+    metadata:
+      labels:
+        app: img-classifier
+    spec:
+      containers:
+        - name: img-classifier
+          image: docker.io/juandu12/img-classifier:v3
+          ports:
+            - containerPort: 8080
